@@ -2,6 +2,14 @@ const hint = document.getElementById("hint")
 const test_button = document.getElementById("button")
 const letter = document.getElementById("letter")
 const add_letters = document.getElementById("add_letters")
+const hang_man = {
+    5: "./hang man svg/1.svg",
+    4: "./hang man svg/2.svg",
+    3: "./hang man svg/3.svg",
+    2: "./hang man svg/4.svg",
+    1: "./hang man svg/5.svg",
+    0: "./hang man svg/6.svg"
+}
 const words = [
     {
         word: "javascript",
@@ -24,18 +32,32 @@ const words = [
         hint: "A musical instrument with strings that is often used in rock, pop, and folk music"
     },
 ];
+
 let guess_number = 6;
 const game = (words) => {
     let char = ""
     let item = getRandomItem(words);
     console.log(item)
     displayHint(item, words)
-    let word_length=item["word"].length
-    add_letters.innerHTML=`${"*".repeat(word_length)} `
+    let word = item["word"]
+    let word_length = word.length
+    add_letters.innerHTML = `${"*".repeat(word_length)} `
 
     test_button.addEventListener("click", () => {
-        char = letter.value;
+        if (guess_number > 0) {
+            if (word_length > 0) {
+                char = letter.value.toLowerCase();
+                index = word.indexOf(char);
+                
 
+            }
+            else if (word_length == 0) {
+                alert("Congratulation, you guessed the world, restart the game to try again");
+            }
+        }
+        else {
+
+        }
     })
 
 
