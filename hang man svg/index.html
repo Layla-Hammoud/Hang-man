@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,19 +11,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap" rel="stylesheet">
     <title>Hand man</title>
 </head>
+
 <body>
     <div class="container">
         <h3 class="title">hangman game</h3>
         <div class="flex">
-        <img src="./start.svg" class="hang_man_image">
-        <div class="input">
-        <label for="letter">Enter a letter</label>
-        <input type="text" id="letter" class="letter_input" maxlength="1">
-        <button type="button" class="button">Test</button>
-    </div>
+            <img src="./start.svg" class="hang_man_image">
+            <div class="input">
+                <label for="letter">Enter a letter</label>
+                <input type="text" id="letter" class="letter_input" maxlength="1">
+                <button type="button" class="button">Test</button>
+            </div>
+        </div>
+        <div class="flex_letter">
+            <div id="add_letters" class="add_letters"></div>
+            <div>
+                <button type="button" class="button_restart">Restat</button>
+            </div>
+        </div>
     </div>
 
-    </div>
-    
 </body>
+
 </html>

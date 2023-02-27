@@ -21,13 +21,13 @@ body{
     width: 15em;
 }
 .input{
-    margin-top: 10%;
+    margin-top: 20%;
 }
 
 .title{
     text-align: center;
 }
-.button{
+.button,.button_restart{
     background-color: rgb(25, 124, 182);
     color: white;
     border: none;
@@ -35,5 +35,25 @@ body{
     border-radius: 10px;
     width:50px;
     height: 25px;
+    font-family: 'Oxygen Mono', monospace;
+
+}
+
+.add_letters{
+    background-color: rgb(25, 124, 182);
+    color:white;
+    width:100px;
+    height: 25px;
+
+}
+.flex_letter{
+    display: flex;
+    justify-content: end;
+}
+.button_restart{
+    width:70px;
+    height: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
 
 }
