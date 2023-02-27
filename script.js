@@ -1,4 +1,7 @@
-let guess_number = 6;
+const hint = document.getElementById("hint")
+const test_button = document.getElementById("button")
+const letter = document.getElementById("letter")
+const add_letters = document.getElementById("add_letters")
 const words = [
     {
         word: "javascript",
@@ -21,13 +24,28 @@ const words = [
         hint: "A musical instrument with strings that is often used in rock, pop, and folk music"
     },
 ];
+let guess_number = 6;
+const game = (words) => {
+    let char = ""
+    let item = getRandomItem(words);
+    console.log(item)
+    displayHint(item, words)
+    let word_length=item["word"].length
+    add_letters.innerHTML=`${"*".repeat(word_length)} `
 
-const game = () =>{
+    test_button.addEventListener("click", () => {
+        char = letter.value;
+
+    })
+
 
 }
-const getRandomItem = (words) =>{
+
+const getRandomItem = (words) => {
     const randomIndex = Math.floor(Math.random() * words.length);
     const item = words[randomIndex];
     return item;
 }
-console.log(getRandomItem(words))
+const displayHint = (item, words) => hint.innerHTML = `Hint : ${item["hint"]}`
+
+game(words)
