@@ -4,6 +4,7 @@ const letter = document.getElementById("letter")
 const add_letters = document.getElementById("add_letters")
 const hang_man = document.getElementById("hang_man")
 const button_restart = document.getElementById("button_restart")
+
 const hang_man_svg = {
     5: "./hang man svg/1.svg",
     4: "./hang man svg/2.svg",
@@ -12,6 +13,7 @@ const hang_man_svg = {
     1: "./hang man svg/5.svg",
     0: "./hang man svg/6.svg"
 }
+
 const words = [
     {
         word: "javascript",
@@ -34,57 +36,68 @@ const words = [
         hint: "A musical instrument with strings that is often used in rock, pop, and folk music"
     },
 ];
-let guess_number = 6;
+
+let guess_number=6;
+let char;
+let item;
+let word;
+let word_length;
+
 const game = (words) => {
-    let char = ""
-    let item = getRandomItem(words);
+    char = ""
+    item = getRandomItem(words);
     displayHint(item, words)
-    let word = item["word"]
-    let word_length = word.length
+    word = item["word"]
+    word_length = word.length
     display = add_letters.innerHTML = `${"*".repeat(word_length)} `
-    test_button.addEventListener("click", () => {
-        if (guess_number >= 1) {
-            if (word_length > 0) {
-                char = letter.value.toLowerCase();
-                index = word.indexOf(char);
-                if (index == -1) {
-                    guess_number--
-                    hang_man.src = `${hang_man_svg[guess_number]}`
-                    letter.value = ""
-                }
-                else {
-                    display = display.split('');
-                    display[index] = word[index];
-                    display = display.join('');
-                    add_letters.innerHTML = `${display} `
-                    word = word.split('');
-                    word[index] = "*";
-                    word = word.join('');
-                    word_length--
-                    console.log(word)
-                    letter.value = ""
-                }
-            }
-            else if (word_length == 0) {
-                letter.value = ""
-                alert("Congratulation, you guessed the world, restart the game to try again");
-            }
-        }
-        else {
-            letter.value = ""
-            alert("You lost, restart to play again")
-        }
-    })
+    test_button.addEventListener("click", guess)
 }
+
 const getRandomItem = (words) => {
     const randomIndex = Math.floor(Math.random() * words.length);
     const item = words[randomIndex];
     return item;
 }
+
 const displayHint = (item) => hint.innerHTML = `Hint : ${item["hint"]}`
 button_restart.addEventListener("click", () => {
+    test_button.removeEventListener("click",guess);
     hang_man.src = "./hang man svg/start.svg"
     guess_number = 6;
     game(words)
 })
+
+const guess = () => {
+    if (guess_number >= 1) {
+        if (word_length > 0) {
+            char = letter.value.toLowerCase();
+            index = word.indexOf(char);
+            if (index == -1) {
+                guess_number--
+                hang_man.src = `${hang_man_svg[guess_number]}`
+                letter.value = ""
+                if(guess_number==0){
+                    letter.value = ""
+                    alert("You lost, restart to play again")
+                }
+            }
+            else {
+                display = display.split('');
+                display[index] = word[index];
+                display = display.join('');
+                add_letters.innerHTML = `${display} `
+                word = word.split('');
+                word[index] = "*";
+                word = word.join('');
+                word_length--
+                letter.value = ""
+                if (word_length == 0) {
+                    letter.value = ""
+                    alert("Congratulation, you guessed the world, restart the game to try again");
+                }
+            }
+        }
+        
+    }
+}
 game(words)
